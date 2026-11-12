@@ -1,0 +1,1 @@
+import type {MetadataRoute} from "next";import {domain,services,areas,slug} from "./data";export default function sitemap():MetadataRoute.Sitemap{return ["/","/services","/service-areas","/about","/contact",...services.map(s=>"/services/"+slug(s)),...areas.map(a=>"/areas/"+slug(a))].map(p=>({url:domain+p,changeFrequency:"monthly" as const,priority:p==="/"?1:0.6}))}
