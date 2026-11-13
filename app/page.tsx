@@ -1,10 +1,80 @@
-import Link from "next/link";import {services,areas,slug,phone,tel,email} from "./data";import {Header,Footer} from "./components";
-const featured=[{name:"Sliding Glass Door Repair",detail:"Sticking, dragging or difficult-to-open sliding doors.",number:"01"},{name:"Roller Replacement",detail:"Worn rollers and rough sliding movement.",number:"02"},{name:"Track Repair",detail:"Damaged tracks, scraping and alignment problems.",number:"03"},{name:"Lock & Handle Repair",detail:"Faulty handles, latches and sliding door locks.",number:"04"}];
-const benefits=[["01","Experienced Service","5 years of sliding door repair experience."],["02","Warranty Protection","1-year warranty. Ask about coverage and terms."],["03","Convenient Appointments","Same-day service when available."],["04","Mobile Repairs","Serving homes and businesses across South Florida."]];
-export default function Home(){return <><div className="announcement">MIAMI BEACH & SOUTH FLORIDA · 8 AM – 8 PM · SAME-DAY SERVICE WHEN AVAILABLE</div><Header/><main>
-<section className="pf-hero"><div className="pf-hero-photo" aria-hidden="true"/><div className="wrap pf-hero-content"><div className="pf-pill"><span className="pf-dot"/> MIAMI BEACH SLIDING DOOR REPAIR</div><h1>Open your door.<br/><span>Enjoy the view.</span></h1><p>Sliding glass door repair in Miami Beach, FL. From worn rollers and damaged tracks to locks, handles and glass — we help get your door moving smoothly again.</p><div className="pf-actions"><a href={"tel:"+tel} className="pf-button pf-button-primary">Call {phone} <span>↗</span></a><Link href="/services" className="pf-button pf-button-outline">Explore Services <span>→</span></Link></div><div className="pf-hero-proof"><span>✓ 5 years experience</span><span>✓ 1-year warranty</span><span>✓ Mobile service</span></div></div></section>
-<div className="pf-trust"><div className="wrap pf-trust-inner"><span>PROFIX SLIDING DOOR REPAIR FL</span><strong>Residential & Commercial</strong><strong>Miami Beach & Surrounding Areas</strong><strong>Call 8 AM – 8 PM</strong></div></div>
-<section className="pf-section" id="services"><div className="wrap"><div className="pf-heading"><div><div className="pf-overline">WHAT WE FIX</div><h2>Sliding door problems?<br/><em>We've got you covered.</em></h2></div><p>Specialized repair services for sliding doors in homes, condos and commercial spaces. Find the service that matches your issue.</p></div><div className="pf-feature-grid">{featured.map(item=><Link href={"/services/"+slug(item.name)} className="pf-feature" key={item.name}><div className="pf-feature-top"><span>{item.number} / SERVICE</span><span className="pf-feature-arrow">↗</span></div><div className="pf-feature-art"><div className="pf-door-outline"><span className="pf-door-pane"/><span className="pf-door-pane"/></div><span className="pf-art-word">{item.name==="Roller Replacement"?"ROLLERS":item.name==="Track Repair"?"TRACKS":item.name==="Lock & Handle Repair"?"HARDWARE":"GLASS DOORS"}</span></div><div className="pf-feature-bottom"><h3>{item.name}</h3><p>{item.detail}</p><span>View service →</span></div></Link>)}</div><div className="pf-more"><div><strong>More ways we can help</strong><p>Additional sliding door services available.</p></div><div className="pf-service-tags">{services.slice(4).map(s=><Link href={"/services/"+slug(s)} key={s}>{s} ↗</Link>)}</div></div></div></section>
-<section className="pf-about"><div className="wrap pf-about-grid"><div className="pf-about-photo"><div className="pf-about-sticker"><strong>5</strong><span>YEARS OF<br/>EXPERIENCE</span></div></div><div className="pf-about-copy"><div className="pf-overline">WHY CHOOSE PROFIX</div><h2>Good repairs.<br/>Better everyday living.</h2><p>Sliding doors are part of everyday life in South Florida. When yours becomes hard to move, won't close correctly or has damaged hardware, ProFix can assess the issue and discuss repair options.</p><div className="pf-benefits">{benefits.map(b=><div className="pf-benefit" key={b[0]}><span>{b[0]}</span><div><strong>{b[1]}</strong><p>{b[2]}</p></div></div>)}</div><a href={"tel:"+tel} className="pf-button pf-button-dark">Talk to ProFix <span>↗</span></a></div></div></section>
-<section className="pf-section pf-areas"><div className="wrap"><div className="pf-heading"><div><div className="pf-overline">LOCAL SERVICE</div><h2>Miami Beach is home base.<br/><em>South Florida is our service area.</em></h2></div><p>Mobile sliding door repair throughout the communities listed below. Call to confirm appointment availability.</p></div><div className="pf-area-list">{areas.map(a=><Link href={"/areas/"+slug(a)} key={a}>{a}<span>↗</span></Link>)}</div></div></section>
-<section className="pf-final"><div className="wrap pf-final-inner"><div><div className="pf-overline">LET'S GET IT FIXED</div><h2>Ready for a door<br/>that slides smoothly?</h2><p>Call to discuss your sliding door issue and check service availability.</p></div><div><a href={"tel:"+tel} className="pf-button pf-button-primary">Call {phone} ↗</a><a href={"mailto:"+email} className="pf-email">{email}</a></div></div></section></main><Footer/><a className="floating-call" href={"tel:"+tel}>☎ CALL NOW · {phone}</a></>}
+import Link from "next/link"
+import { areas, services, slug } from "./data"
+import { ArrowUpRightIcon, CallButton, EstimateButton, Footer, Header, ServiceCard } from "./components"
+
+const doorPhoto = "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&crop=right&w=2200&h=1200&q=85"
+const featuredAreas = areas.slice(0, 10)
+
+export default function Home() {
+  return (
+    <>
+      <Header />
+      <main className="home-main">
+        <section className="hero" aria-labelledby="home-title">
+          <img className="hero-image" src={doorPhoto} alt="Dark-framed sliding glass patio doors opening to an outdoor terrace" fetchPriority="high" />
+          <div className="hero-shade" aria-hidden="true" />
+          <div className="hero-content site-shell">
+            <p className="eyebrow eyebrow-light">SLIDING DOOR REPAIR <span>MIAMI BEACH, FL</span></p>
+            <h1 id="home-title">Get your sliding door <span>back on track.</span></h1>
+            <p className="hero-intro">Sliding glass door repair across Miami Beach and surrounding South Florida communities. Rollers, tracks, locks, glass and screens.</p>
+            <div className="hero-actions">
+              <CallButton className="button button-primary" />
+              <EstimateButton className="button button-outline-light" />
+            </div>
+            <ul className="hero-trust" aria-label="Business details">
+              <li>5 years of experience</li>
+              <li>1-year warranty</li>
+              <li>Mobile service</li>
+            </ul>
+          </div>
+          <div className="hero-caption">SLIDING GLASS PATIO DOOR</div>
+        </section>
+
+        <section className="service-section section-pad" id="services" aria-labelledby="services-title">
+          <div className="site-shell">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">REPAIR SERVICES</p>
+                <h2 id="services-title">The right repair for <span>the way your door moves.</span></h2>
+              </div>
+              <p>Choose a service to learn more. If you are unsure what is causing the problem, call to talk through the symptoms.</p>
+            </div>
+            <div className="service-grid">
+              {services.map((service, index) => <ServiceCard key={service} service={service} index={index} />)}
+            </div>
+            <Link href="/services" className="all-services-link">View all services <ArrowUpRightIcon /></Link>
+          </div>
+        </section>
+
+        <section className="area-section section-pad" aria-labelledby="areas-title">
+          <div className="site-shell area-layout">
+            <div className="area-copy">
+              <p className="eyebrow">SERVICE AREAS</p>
+              <h2 id="areas-title">Serving Miami Beach <span>and South Florida.</span></h2>
+              <p>Mobile repair service for homes and businesses in the communities below. Call to confirm availability in your area.</p>
+              <Link href="/service-areas" className="text-link">See all service areas <ArrowUpRightIcon /></Link>
+            </div>
+            <ul className="area-list" aria-label="Featured service areas">
+              {featuredAreas.map(area => <li key={area}><Link href={`/areas/${slug(area)}`}>{area}<ArrowUpRightIcon /></Link></li>)}
+            </ul>
+          </div>
+        </section>
+
+        <section className="contact-banner" aria-labelledby="contact-title">
+          <div className="site-shell contact-banner-inner">
+            <div>
+              <p className="eyebrow eyebrow-light">PROFIX SLIDING DOOR REPAIR FL</p>
+              <h2 id="contact-title">Ready to talk about your door?</h2>
+              <p>Call to discuss the issue and check service availability.</p>
+            </div>
+            <div className="contact-banner-actions">
+              <CallButton className="button button-light" />
+              <EstimateButton className="button button-outline-light" />
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}
