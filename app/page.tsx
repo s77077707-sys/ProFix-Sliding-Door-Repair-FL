@@ -3,8 +3,6 @@ import { areas, services, slug } from "./data"
 import { ArrowUpRightIcon, CallButton, EstimateButton, Footer, Header, ServiceCard } from "./components"
 
 const doorPhoto = "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&crop=right&w=2200&h=1200&q=85"
-const featuredServices = services.slice(0, 6)
-const additionalServices = services.slice(6)
 const featuredAreas = areas.slice(0, 10)
 
 export default function Home() {
@@ -42,17 +40,7 @@ export default function Home() {
               <p>Choose a service to learn more. If you are unsure what is causing the problem, call to talk through the symptoms.</p>
             </div>
             <div className="service-grid">
-              {featuredServices.map((service, index) => <ServiceCard key={service} service={service} index={index} />)}
-            </div>
-            <div className="service-more">
-              <p>MORE REPAIR SERVICES</p>
-              <div>
-                {additionalServices.map(service => (
-                  <Link key={service} href={`/services/${slug(service)}`} className="text-link">
-                    {service}<ArrowUpRightIcon />
-                  </Link>
-                ))}
-              </div>
+              {services.map((service, index) => <ServiceCard key={service} service={service} index={index} />)}
             </div>
             <Link href="/services" className="all-services-link">View all services <ArrowUpRightIcon /></Link>
           </div>

@@ -1,5 +1,7 @@
+import Image from "next/image"
 import Link from "next/link"
 import { email, name, phone, services, slug, tel } from "./data"
+import { getServicePhoto } from "./photos"
 
 export function ArrowUpRightIcon() {
   return <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="icon"><path d="M7 17 17 7M7 7h10v10" /></svg>
@@ -29,16 +31,27 @@ export const serviceDescriptions: Record<string, string> = {
   "Commercial Sliding Door Repair": "Sliding door repair options for commercial properties.",
 }
 
-export function PhotoPlaceholder({ title, index = 0, className = "" }: { title: string; index?: number; className?: string }) {
-  const tone = ((index % 4) + 4) % 4
+export function ServicePhoto({ title, className = "", sizes = "(max-width: 720px) calc(100vw - 38px), (max-width: 980px) 50vw, 33vw" }: { title: string; className?: string; sizes?: string }) {
+  const photo = getServicePhoto(title)
   return (
-    <figure className={`photo-placeholder ${className}`} data-tone={tone}>
-      <div className="photo-placeholder-copy">
-        <span>PHOTO TO BE SOURCED</span>
-        <strong>{title}</strong>
+    <figure className={`service-photo ${className}`}>
+      <div className="service-photo-frame">
+        <Image src={photo.src} alt={photo.alt} fill sizes={sizes} style={{ objectPosition: photo.objectPosition ?? "center" }} className="service-photo-image" />
       </div>
-      <figcaption className="sr-only">A verified service photograph for {title} has not yet been sourced.</figcaption>
+      <figcaption className="service-photo-caption">{photo.caption}</figcaption>
     </figure>
+  )
+}
+
+export function PhotoCredit({ title }: { title: string }) {
+  const photo = getServicePhoto(title)
+  return (
+    <div className="service-photo-credit">
+      <span>Photo</span>
+      <a href={photo.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Open source photo by ${photo.credit} in a new tab`}>{photo.credit}</a>
+      <span aria-hidden="true">·</span>
+      <a href={photo.licenseUrl} target="_blank" rel="noreferrer" aria-label={`View the ${photo.licenseLabel} license in a new tab`}>{photo.licenseLabel}</a>
+    </div>
   )
 }
 
@@ -86,14 +99,17 @@ export function Header() {
 
 export function ServiceCard({ service, index }: { service: string; index: number }) {
   return (
-    <Link href={`/services/${slug(service)}`} className="service-card">
-      <PhotoPlaceholder title={service} index={index} className="service-card-photo" />
-      <div className="service-card-copy">
-        <div className="service-card-heading"><span className="service-index">{String(index + 1).padStart(2, "0")}</span><ArrowUpRightIcon /></div>
-        <h3>{service}</h3>
-        <p>{serviceDescriptions[service]}</p>
-      </div>
-    </Link>
+    <article className="service-card">
+      <Link href={`/services/${slug(service)}`} className="service-card-link">
+        <ServicePhoto title={service} className="service-card-photo" />
+        <div className="service-card-copy">
+          <div className="service-card-heading"><span className="service-index">{String(index + 1).padStart(2, "0")}</span><ArrowUpRightIcon /></div>
+          <h3>{service}</h3>
+          <p>{serviceDescriptions[service]}</p>
+        </div>
+      </Link>
+      <PhotoCredit title={service} />
+    </article>
   )
 }
 
@@ -107,7 +123,7 @@ export function Footer() {
             <span className="brand-subtitle">SLIDING DOOR REPAIR · FLORIDA</span>
           </Link>
           <p>Sliding glass door repair in Miami Beach and surrounding South Florida communities.</p>
-          <a className="footer-license" href="https://unsplash.com/license" target="_blank" rel="noreferrer">Hero photograph: Unsplash License</a>
+          <a className="footer-license" href="https://unsplash.com/license" target="_blank" rel="noreferrer">Hero photograph: Unsplash License · Service photo credits and licenses appear with each card</a>
         </div>
         <div className="footer-column">
           <h2>Services</h2>

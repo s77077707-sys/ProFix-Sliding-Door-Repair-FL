@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { areas, email, phone, services, slug, tel } from "../data"
-import { ArrowUpRightIcon, CallButton, ChevronRightIcon, EstimateButton, Footer, Header, PhotoPlaceholder, ServiceCard, serviceDescriptions } from "../components"
+import { ArrowUpRightIcon, CallButton, ChevronRightIcon, EstimateButton, Footer, Header, PhotoCredit, ServiceCard, ServicePhoto, serviceDescriptions } from "../components"
 
 export function generateStaticParams() {
   return [
@@ -83,7 +83,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
                     <div className="related-service-list">{services.filter(item => item !== service).slice(0, 4).map(item => <Link key={item} href={`/services/${slug(item)}`}>{item}<ArrowUpRightIcon /></Link>)}</div>
                   </div>
                 </div>
-                <PhotoPlaceholder title={service} index={services.indexOf(service)} className="service-detail-photo" />
+                <div className="service-detail-visual">
+                  <ServicePhoto title={service} className="service-detail-photo" sizes="(max-width: 720px) calc(100vw - 38px), 50vw" />
+                  <PhotoCredit title={service} />
+                </div>
               </section>
               <PageCta />
             </>
