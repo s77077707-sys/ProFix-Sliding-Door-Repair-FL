@@ -13,13 +13,13 @@ const flickrLicense = "https://creativecommons.org/licenses/by/2.0/deed.en"
 
 export const servicePhotos: Record<string, ServicePhotoDetails> = {
   "Sliding Glass Door Repair": {
-    src: "https://live.staticflickr.com/8660/16259926217_f0c10c2b66_b.jpg",
-    alt: "Workers renovate a room addition beside a patio-door opening temporarily covered during construction.",
-    caption: "Illustrative: patio-door renovation in progress.",
-    credit: "David Cedrone / NLT Construction",
-    sourceUrl: "https://www.flickr.com/photos/nltconstruction/16259926217/",
-    licenseLabel: "CC BY 2.0",
-    licenseUrl: flickrLicense,
+    src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&crop=right&w=2200&h=1200&q=85",
+    alt: "Black-framed sliding glass patio doors open onto a sunlit terrace.",
+    caption: "Illustrative: sliding glass patio door; repair work is not shown.",
+    credit: "Unsplash",
+    sourceUrl: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&crop=right&w=2200&h=1200&q=85",
+    licenseLabel: "Unsplash license",
+    licenseUrl: "https://unsplash.com/license",
   },
   "Roller Replacement": {
     src: "https://live.staticflickr.com/418/19100028372_be0cbf36de_z.jpg",
