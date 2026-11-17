@@ -79,7 +79,7 @@ export function Header() {
             <Link href="/services">Services</Link>
             <Link href="/service-areas">Service Areas</Link>
             <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href="/contact">Contact</Link><Link href="/faq">FAQ</Link>
           </nav>
           <CallButton className="header-call" />
           <details className="mobile-nav">
