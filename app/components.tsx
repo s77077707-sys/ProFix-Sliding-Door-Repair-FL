@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { email, name, phone, services, slug, tel } from "./data"
+import { address, email, name, phone, services, slug, tel } from "./data"
 import { getServicePhoto } from "./photos"
 
 export function ArrowUpRightIcon() {
@@ -134,6 +134,7 @@ export function Footer() {
           <h2>Contact</h2>
           <a href={`tel:${tel}`}>{phone}</a>
           <a href={`mailto:${email}`}>{email}</a>
+          <p>{address}</p>
           <p>8 AM–8 PM</p>
           <Link href="/service-areas">Service areas</Link>
           <Link href="/about">About ProFix</Link>
